@@ -2,13 +2,14 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
-
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
+import { BrowserRouter, Route, Routes } from 'react-router'
+
 import App from './App'
-import { store } from './store/store'
 import './index.css'
+import { store } from './store/store'
 
 const container = document.getElementById('root')
 
@@ -18,7 +19,11 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+          </Routes>
+        </BrowserRouter>
       </Provider>
     </React.StrictMode>,
   )

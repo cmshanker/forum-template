@@ -1,6 +1,7 @@
-import { useState } from "react"
-import styles from "./Quotes.module.css"
-import { useGetQuotesQuery } from "./quotesApiSlice"
+import { useState } from 'react'
+
+import styles from './Quotes.module.css'
+import { useGetQuotesQuery } from './quotesApiSlice'
 
 const options = [5, 10, 20, 30]
 
@@ -33,11 +34,11 @@ export const Quotes = () => {
         <select
           className={styles.select}
           value={numberOfQuotes}
-          onChange={e => {
+          onChange={(e) => {
             setNumberOfQuotes(Number(e.target.value))
           }}
         >
-          {options.map(option => (
+          {options.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
