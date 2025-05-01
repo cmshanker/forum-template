@@ -20,7 +20,7 @@ CREATE TABLE threads (
     created_at     timestamp,
     created_by     integer REFERENCES users (id),
     last_posted_in timestamp,
-    last_posted_by integer REFERENCES users (id),
+    last_post_by   integer REFERENCES users (id),
     board_id       integer REFERENCES boards (id)
 );
 

@@ -22,6 +22,7 @@ import { User } from './users/users.entity';
       database: 'forum',
       entities: [User],
       synchronize: true,
+      autoLoadEntities: true,
     }),
   ],
 })
