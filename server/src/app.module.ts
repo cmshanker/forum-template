@@ -1,16 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
+import { Board } from './boards/boards.entity';
 import { BoardsModule } from './boards/boards.module';
-import { ThreadsModule } from './threads/threads.module';
+import { Member } from './members/members.entity';
+import { MembersModule } from './members/members.module';
+import { Post } from './posts/posts.entity';
 import { PostsModule } from './posts/posts.module';
-import { User } from './users/users.entity';
+import { Thread } from './threads/threads.entity';
+import { ThreadsModule } from './threads/threads.module';
 
 @Module({
   imports: [
     AuthModule,
-    UsersModule,
+    MembersModule,
     BoardsModule,
     ThreadsModule,
     PostsModule,
@@ -20,7 +24,7 @@ import { User } from './users/users.entity';
       port: 5432,
       username: 'postgres',
       database: 'forum',
-      entities: [User],
+      entities: [Board, Post, Thread, Member],
       synchronize: true,
       autoLoadEntities: true,
     }),
