@@ -2,12 +2,13 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
+import 'dotenv/config'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 
-import App from './App'
 import './index.css'
+import Boards from './pages/Boards'
 
 const container = document.getElementById('root')
 
@@ -18,7 +19,7 @@ if (container) {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route path="/" element={<Boards />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>,
