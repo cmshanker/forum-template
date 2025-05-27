@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
@@ -10,6 +10,7 @@ import { Post } from './posts/posts.entity';
 import { PostsModule } from './posts/posts.module';
 import { Thread } from './threads/threads.entity';
 import { ThreadsModule } from './threads/threads.module';
+import { AppLoggerMiddleware } from './utils/logger';
 
 @Module({
   imports: [
@@ -30,4 +31,8 @@ import { ThreadsModule } from './threads/threads.module';
     }),
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
+  }
+}
