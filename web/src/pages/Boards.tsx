@@ -22,10 +22,8 @@ const Boards = (): React.ReactElement => {
       setBoards(data)
     }
 
-    console.log('hello???')
     fetchBoards().catch(console.error)
   }, [])
-  console.log('hiiiiiii')
   console.log(boards)
 
   return (

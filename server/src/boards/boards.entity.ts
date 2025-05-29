@@ -1,3 +1,4 @@
+import { BoardGroup } from 'src/board_groups/board_groups.entity';
 import {
   Entity,
   Column,
@@ -13,6 +14,10 @@ export class Board {
 
   @Column({ name: 'name' })
   name: string;
+
+  @ManyToOne(() => BoardGroup, (boardGroup) => boardGroup.id)
+  @JoinColumn({ name: 'board_group_id' })
+  boardGroupId: number;
 
   @ManyToOne(() => Board, (board) => board.id)
   @JoinColumn({ name: 'parent_id' })

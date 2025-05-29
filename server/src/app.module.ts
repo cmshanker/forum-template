@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { Board } from './boards/boards.entity';
 import { BoardsModule } from './boards/boards.module';
+import { BoardGroup } from './board_groups/board_groups.entity';
+import { BoardGroupsModule } from './board_groups/board_groups.module';
 import { Member } from './members/members.entity';
 import { MembersModule } from './members/members.module';
 import { Post } from './posts/posts.entity';
@@ -17,6 +19,7 @@ import { AppLoggerMiddleware } from './utils/logger';
     AuthModule,
     MembersModule,
     BoardsModule,
+    BoardGroupsModule,
     ThreadsModule,
     PostsModule,
     TypeOrmModule.forRoot({
@@ -25,7 +28,7 @@ import { AppLoggerMiddleware } from './utils/logger';
       port: 5432,
       username: 'postgres',
       database: 'forum',
-      entities: [Board, Post, Thread, Member],
+      entities: [Board, BoardGroup, Post, Thread, Member],
       synchronize: true,
       autoLoadEntities: true,
     }),

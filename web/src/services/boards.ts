@@ -7,13 +7,13 @@ export const GetBoards = async (): Promise<Board[]> => {
     const response = await fetch(boardsUrl, {
       method: 'GET',
     })
+    console.log('in the request')
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`)
     }
 
     const json = await response.json()
-    console.log(json)
-    return []
+    return json
   } catch (error) {
     throw error
   }

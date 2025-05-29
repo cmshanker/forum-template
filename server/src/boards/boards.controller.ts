@@ -20,6 +20,7 @@ export class BoardsController {
     this.boardsService.create({
       id: createBoardDto.id,
       name: createBoardDto.name,
+      boardGroupId: createBoardDto.boardGroupId,
       parentId: createBoardDto.parentId ?? undefined,
     });
   }
