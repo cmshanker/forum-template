@@ -1,25 +1,22 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AuthModule } from './auth/auth.module';
-import { Board } from './boards/boards.entity';
+import { Board } from './boards/entities/boards.entity';
 import { BoardsModule } from './boards/boards.module';
-import { BoardGroup } from './board_groups/board_groups.entity';
-import { BoardGroupsModule } from './board_groups/board_groups.module';
+import { BoardGroup } from './boards/entities/board_groups.entity';
 import { Member } from './members/members.entity';
 import { MembersModule } from './members/members.module';
 import { Post } from './posts/posts.entity';
 import { PostsModule } from './posts/posts.module';
 import { Thread } from './threads/threads.entity';
 import { ThreadsModule } from './threads/threads.module';
-import { AppLoggerMiddleware } from './utils/logger';
 
 @Module({
   imports: [
     AuthModule,
     MembersModule,
     BoardsModule,
-    BoardGroupsModule,
     ThreadsModule,
     PostsModule,
     TypeOrmModule.forRoot({
@@ -31,11 +28,8 @@ import { AppLoggerMiddleware } from './utils/logger';
       entities: [Board, BoardGroup, Post, Thread, Member],
       synchronize: true,
       autoLoadEntities: true,
+      logging: true,
     }),
   ],
 })
-export class AppModule {
-  configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(AppLoggerMiddleware).forRoutes('*');
-  }
-}
+export class AppModule {}

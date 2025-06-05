@@ -1,5 +1,4 @@
 export class CreateBoardGroupDto {
-  id: number;
   name: string;
 }
 

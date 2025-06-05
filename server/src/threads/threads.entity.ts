@@ -6,7 +6,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import { Board } from 'src/boards/boards.entity';
+import { Board } from 'src/boards/entities/boards.entity';
 import { Member } from 'src/members/members.entity';
 
 @Entity()

@@ -1,8 +1,14 @@
 export const SERVER_URL = 'http://localhost:3000'
 
+export type BoardGroup = {
+  id: number
+  name: string
+}
+
 export type Board = {
   id: number
   name: string
+  boardGroupId: number
   parentId?: number
 }
 

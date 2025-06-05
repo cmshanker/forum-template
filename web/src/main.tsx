@@ -7,7 +7,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 
 import './index.css'
-import Boards from './pages/Boards'
+import Home from './pages/Home'
 
 const container = document.getElementById('root')
 
@@ -18,7 +18,7 @@ if (container) {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Boards />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>,
