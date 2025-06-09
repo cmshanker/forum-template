@@ -1,31 +1,32 @@
 import { Logger, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from 'typeorm';
 
 import { Board } from './entities/boards.entity';
 import { CreateBoardDto } from './dto/boards.dto';
 import { BoardGroup } from './entities/board_groups.entity';
+import { CreateBoardGroupDto } from './dto/board_groups.dto';
 
 @Injectable()
 export class BoardsService {
   constructor(
     @InjectRepository(Board)
-    private boardsRepository: Repository<Board>,
+    private readonly boardsRepository: Repository<Board>,
+    private readonly entityManager: EntityManager,
   ) {}
 
   private readonly logger = new Logger(BoardsService.name);
 
-  async create(createBoardDto: CreateBoardDto) {
-    const boardGroup = new BoardGroup({ name: createBoardDto.boardGroup.name });
-    this.logger.log('---------------------------------');
-    this.logger.log(boardGroup);
-    const board = new Board({
-      ...createBoardDto,
-      boardGroup,
-    });
-    this.logger.log('---------------------------------');
-    this.logger.log(board);
-    await this.boardsRepository.save(board);
+  async createBoard(createBoardDto: CreateBoardDto) {
+    const board = new Board({ ...createBoardDto });
+    await this.entityManager.save(board);
+  }
+
+  async createBoardGroup(createBoardGroupDto: CreateBoardGroupDto) {
+    const boards =
+      createBoardGroupDto.boards?.map((cbd) => new Board({ ...cbd })) ?? [];
+    const boardGroup = new BoardGroup({ ...createBoardGroupDto, boards });
+    await this.entityManager.save(boardGroup);
   }
 
   findAll(): Promise<Board[]> {
