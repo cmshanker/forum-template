@@ -5,11 +5,11 @@ import { AuthModule } from './auth/auth.module';
 import { Board } from './boards/entities/boards.entity';
 import { BoardsModule } from './boards/boards.module';
 import { BoardGroup } from './boards/entities/board_groups.entity';
-import { Member } from './members/members.entity';
+import { Member } from './members/entity/members.entity';
 import { MembersModule } from './members/members.module';
-import { Post } from './posts/posts.entity';
+import { Post } from './posts/entity/posts.entity';
 import { PostsModule } from './posts/posts.module';
-import { Thread } from './threads/threads.entity';
+import { Thread } from './threads/entity/threads.entity';
 import { ThreadsModule } from './threads/threads.module';
 
 @Module({

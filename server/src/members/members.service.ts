@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { Member } from './members.entity';
+import { Member } from './entity/members.entity';
+import { CreateMemberDto } from './dto/members.dto';
 
 @Injectable()
 export class MembersService {
@@ -11,8 +12,9 @@ export class MembersService {
     private membersRepository: Repository<Member>,
   ) {}
 
-  create(member: Member) {
-    return this.membersRepository.create(member);
+  async create(createMemberDto: CreateMemberDto) {
+    const member = new Member({ ...createMemberDto, threads: [], posts: [] });
+    await this.membersRepository.save(member);
   }
 
   findAll(): Promise<Member[]> {

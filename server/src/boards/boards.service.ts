@@ -1,4 +1,4 @@
-import { Logger, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 
@@ -15,8 +15,6 @@ export class BoardsService {
     private readonly entityManager: EntityManager,
   ) {}
 
-  private readonly logger = new Logger(BoardsService.name);
-
   async createBoard(createBoardDto: CreateBoardDto) {
     const board = new Board({ ...createBoardDto });
     await this.entityManager.save(board);
@@ -30,11 +28,11 @@ export class BoardsService {
   }
 
   findAll(): Promise<Board[]> {
-    const asdf = this.boardsRepository.find();
-    void asdf.then((boards) => {
-      this.logger.log(boards);
+    return this.boardsRepository.find({
+      relations: {
+        boardGroup: true,
+      },
     });
-    return asdf;
   }
 
   findOne(id: number): Promise<Board | null> {

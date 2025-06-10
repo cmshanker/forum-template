@@ -6,7 +6,6 @@ import {
   Put,
   Param,
   Delete,
-  Logger,
 } from '@nestjs/common';
 
 import { CreateBoardDto, UpdateBoardDto } from './dto/boards.dto';
@@ -16,17 +15,14 @@ import { CreateBoardGroupDto } from './dto/board_groups.dto';
 @Controller('boards')
 export class BoardsController {
   constructor(private boardsService: BoardsService) {}
-  private readonly logger = new Logger(BoardsController.name);
 
   @Post()
   async createBoard(@Body() createBoardDto: CreateBoardDto) {
-    this.logger.log(createBoardDto);
     return this.boardsService.createBoard(createBoardDto);
   }
 
   @Post('/group')
   async createBoardGroup(@Body() createBoardGroupDto: CreateBoardGroupDto) {
-    this.logger.log(createBoardGroupDto);
     return this.boardsService.createBoardGroup(createBoardGroupDto);
   }
 

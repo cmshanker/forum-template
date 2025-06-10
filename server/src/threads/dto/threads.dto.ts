@@ -1,11 +1,10 @@
+import { CreateBoardDto } from 'src/boards/dto/boards.dto';
+
 export class CreateThreadDto {
-  id: number;
   name: string;
-  createdAt: Date;
   createdBy: number;
-  lastPostedIn: Date;
   lastPostBy: number;
-  boardId: number;
+  boards: CreateBoardDto[];
 }
 
 export class UpdateThreadDto {

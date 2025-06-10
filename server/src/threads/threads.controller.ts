@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreateThreadDto, UpdateThreadDto } from './threads.dto';
+import { CreateThreadDto, UpdateThreadDto } from './dto/threads.dto';
 import { ThreadsService } from './threads.service';
 
 @Controller('threads')
@@ -16,16 +16,8 @@ export class ThreadsController {
   constructor(private threadsService: ThreadsService) {}
 
   @Post()
-  create(@Body() createThreadDto: CreateThreadDto) {
-    this.threadsService.create({
-      id: createThreadDto.id,
-      name: createThreadDto.name,
-      createdAt: new Date(),
-      createdBy: createThreadDto.createdBy,
-      lastPostedIn: new Date(),
-      lastPostBy: createThreadDto.createdBy,
-      boardId: createThreadDto.boardId,
-    });
+  async create(@Body() createThreadDto: CreateThreadDto) {
+    return this.threadsService.create(createThreadDto);
   }
 
   @Get()

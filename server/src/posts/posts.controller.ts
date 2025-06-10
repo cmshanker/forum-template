@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreatePostDto, UpdatePostDto } from './posts.dto';
+import { CreatePostDto, UpdatePostDto } from './dto/posts.dto';
 import { PostsService } from './posts.service';
 
 @Controller('posts')
@@ -16,15 +16,8 @@ export class PostsController {
   constructor(private postsService: PostsService) {}
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    this.postsService.create({
-      id: createPostDto.id,
-      content: createPostDto.content,
-      createdAt: new Date(),
-      createdBy: createPostDto.createdBy,
-      lastEditedAt: createPostDto.lastEditedAt ?? undefined,
-      threadId: createPostDto.threadId,
-    });
+  async create(@Body() createPostDto: CreatePostDto) {
+    return this.postsService.create(createPostDto);
   }
 
   @Get()

@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreateMemberDto, UpdateMemberDto } from './members.dto';
+import { CreateMemberDto, UpdateMemberDto } from './dto/members.dto';
 import { MembersService } from './members.service';
 
 @Controller('members')
@@ -16,13 +16,8 @@ export class MembersController {
   constructor(private membersService: MembersService) {}
 
   @Post()
-  create(@Body() createMemberDto: CreateMemberDto) {
-    this.membersService.create({
-      id: createMemberDto.id,
-      username: createMemberDto.username,
-      role: createMemberDto.role,
-      createdAt: new Date(),
-    });
+  async create(@Body() createMemberDto: CreateMemberDto) {
+    return this.membersService.create(createMemberDto);
   }
 
   @Get()

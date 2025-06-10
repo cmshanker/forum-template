@@ -1,5 +1,4 @@
 export class CreateMemberDto {
-  id: number;
   username: string;
   role: string;
 }

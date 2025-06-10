@@ -1,5 +1,12 @@
 import { BoardGroup } from 'src/boards/entities/board_groups.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Thread } from 'src/threads/entity/threads.entity';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Board {
@@ -11,6 +18,9 @@ export class Board {
 
   @ManyToOne(() => BoardGroup, (boardGroup) => boardGroup.boards)
   boardGroup: BoardGroup;
+
+  @ManyToMany(() => Thread, (thread) => thread.boards, { cascade: true })
+  threads: Thread[];
 
   constructor(board: Partial<Board>) {
     Object.assign(this, board);
